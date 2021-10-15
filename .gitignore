@@ -3,3 +3,6 @@ node_modules
 .hubot_history
 .env
 .tool-versions
+.vscode/
+package.json
+package-lock.json
