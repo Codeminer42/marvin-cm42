@@ -74,8 +74,8 @@ Then you can interact with Marvin by typing `marvin help`.
 
 You can start Marvin as a local server to connect to Discord.
 
-1.  Ask for the `HUBOT_DISCORD_TOKEN` for someone in the team.
-2.  Run:
+1. Ask for the `HUBOT_DISCORD_TOKEN` for someone in the team.
+2. Run:
 
         HUBOT_DISCORD_TOKEN='the token you received' bin/hubot -a discord
 
