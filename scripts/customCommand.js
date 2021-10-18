@@ -10,7 +10,6 @@ const preDefinedCommands = [
   'brownbag',
   'brownbagnext',
   'brownbagprev',
-  'brownbags',
   'calendar',
   'egghead',
   'excuses',
@@ -28,7 +27,7 @@ const DEL_CMD_RE = /delete command (\w+)/
 const LST_CMD_RE = /!list/i
 const RED_CMD_RE = /(?<=^|\s)!(\w+)\b(.*)/i
 
-const addFixedArguments = (args) => ({
+const addFixedArguments = args => ({
   ...args,
   timestamp: Math.floor(Date.now() / 1000)
 })
@@ -43,7 +42,10 @@ const getArguments = str =>
 const replaceWithArguments = (str, args) => {
   const allArgs = addFixedArguments(args)
 
-  return Object.keys(allArgs).reduce((acc, argName) => acc.replace(`<${argName}>`, allArgs[argName]), str)
+  return Object.keys(allArgs).reduce(
+    (acc, argName) => acc.replace(`<${argName}>`, allArgs[argName]),
+    str
+  )
 }
 
 const addCommandFunction = robot => msg => {
@@ -70,7 +72,7 @@ const listCommandsFunction = robot => msg => {
   robot.messageRoom(
     room,
     'Here you can see a list of commands created by our users:\n' +
-    listCommands.join('\n')
+      listCommands.join('\n')
   )
 }
 
