@@ -16,7 +16,6 @@ There are many ways to contribute with this project:
 
 You can also find which issues are in progress or still need to be done on [github.com/Codeminer42/marvin-cm42/projects/1](https://github.com/Codeminer42/marvin-cm42/projects/1)
 
-
 ## Dependencies
 
 - Node.js `v14.15.x`
