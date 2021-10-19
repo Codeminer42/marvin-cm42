@@ -16,6 +16,7 @@ There are many ways to contribute with this project:
 
 You can also find which issues are in progress or still need to be done on [github.com/Codeminer42/marvin-cm42/projects/1](https://github.com/Codeminer42/marvin-cm42/projects/1)
 
+
 ## Dependencies
 
 - Node.js `v14.15.x`
@@ -54,8 +55,9 @@ Then you can interact with Marvin by typing `marvin help`.
 
 You can start Marvin as a local server to connect to Discord.
 
-1. Ask for the [HUBOT_DISCORD_TOKEN](https://discord.com/developers/applications/) for someone in the team.
-2. Run:
+1. Create a new Discord Application and Bot at [discord.com/developers/applications/](https://discord.com/developers/applications/)
+2. Copy the application token\
+3. Run:
 
         HUBOT_DISCORD_TOKEN='the token you received' bin/hubot -a discord
 
