@@ -1,27 +1,20 @@
 # Marvin
 
-Marvin is a chat bot built on the Hubot framework.
-You can find more information about Hubot in the [documentation](https://hubot.github.com/docs/).
+Marvin is a chatbot built with Hubot framework.
+You can find more information about Hubot at [hubot.github.com/docs/](https://hubot.github.com/docs/).
 
 ## Purpose
 
-Marvin is mainly used by Codeminer42 team to get information faster.
-Some of the most used commands are described below:
-
-| COMMAND   | DESCRIPTION                                     |
-| --------- | ----------------------------------------------- |
-| !brownbag | Give instructions on how to schedule a brownbag |
-| !calendar | List upcoming events                            |
-| !list     | Returns a list with dynamic created commands    |
-| !test     | Display all tests links                         |
-
+Marvin is mainly used at Codeminer42 to get information faster.
 You can find more available commands typing `marvin help`.
-
-To learn how to run them, please check [Running Marvin Locally](#running-marvin-locally).
 
 ## How to contribute
 
-If you want to contribute with this project, please check the open issues.
+There are many ways to contribute with this project:
+- To report issues or help us to fix them, please check [github.com/Codeminer42/marvin-cm42/issues](https://github.com/Codeminer42/marvin-cm42/issues)
+- To open/review Pull Requests, check [github.com/Codeminer42/marvin-cm42/pulls](https://github.com/Codeminer42/marvin-cm42/pulls)
+
+You can also find which issues are in progress or still need to be done on [github.com/Codeminer42/marvin-cm42/projects/1](https://github.com/Codeminer42/marvin-cm42/projects/1)
 
 ## Dependencies
 
@@ -61,8 +54,8 @@ Then you can interact with Marvin by typing `marvin help`.
 
 You can start Marvin as a local server to connect to Discord.
 
-1.  Ask for the `HUBOT_DISCORD_TOKEN` for someone in the team.
-2.  Run:
+1. Ask for the [HUBOT_DISCORD_TOKEN](https://discord.com/developers/applications/) for someone in the team.
+2. Run:
 
         HUBOT_DISCORD_TOKEN='the token you received' bin/hubot -a discord
 
@@ -87,7 +80,7 @@ You can start Marvin as a local server to connect to Discord.
 17. Allow marvin-gmail-connector access
 18. Copy the token and paste it back into the console (token.json file will be created)
 19. Fill the environment variables with the data from token.json and then delete the file.<br>
-    Tip: in the `GMAIL_SCOPE` variable you have to put content inside quotes and apart by space
+    + Tip: in the `GMAIL_SCOPE` variable you have to put content inside quotes and apart by space
 20. Run marvin normally
 21. To use the calendar command you need to fill the variable with an calendar id.
 22. Go to google calendar, in the left tab, select your calendar or create one. To select, click in the vertical threed dots.
