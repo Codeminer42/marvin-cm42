@@ -4,8 +4,8 @@
 //   !brownbagnext - the next schedule stream
 //   !brownbagprev - the last streamed video
 //   !calendar - List upcoming events
-//   !egggead - fetch egghead token from marvin@codeminer42.com
-//   !streamyard - fetch streamyard code from marvin@codeminer42.com
+//   !egggead - fetch egghead token from your-email@example.com
+//   !streamyard - fetch streamyard code from your-email@example.com
 //   !youtube - show the 3 upcoming streams schedule on youtube
 //   !youtubeall - show up to 100 upcoming streams schedule on youtube
 const retrieveCalendar = require('../lib/google/retrieveCalendar')
