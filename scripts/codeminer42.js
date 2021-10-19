@@ -17,15 +17,7 @@ module.exports = (robot) => {
   });
 
   robot.hear(/!test\b/, (res) => {
-    res.send(
-      process.env.TEST_LINKS
-        ? process.env.TEST_LINKS
-        : [
-            "Frontend: <https://gist.github.com/talyssonoc/4b55d989ca0dee5b842dd01fbd5e3698>",
-            "Backend: <https://gist.github.com/talyssonoc/fa8094bc4f87ecee9f483f5fbc16862c>",
-            "Mobile: <https://gist.github.com/akitaonrails/ec29ca437ee1f18d9a2e613292a541bf>",
-          ].join("\n")
-    );
+    res.send(process.env.TEST_LINKS);
   });
 
   robot.hear(/!brownbag\b/, (res) => {
