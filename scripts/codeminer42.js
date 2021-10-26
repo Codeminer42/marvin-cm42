@@ -17,7 +17,7 @@ module.exports = (robot) => {
   })
 
   robot.hear(/!test\b/, (res) => {
-    res.send(process.env.TEST_LINKS.split(', ').join('\n'))
+    res.send(process.env.TEST_LINKS)
   })
 
   robot.hear(/!brownbag\b/, (res) => {
