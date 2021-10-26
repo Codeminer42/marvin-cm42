@@ -48,12 +48,13 @@ describe('codeminer42', () => {
 
   context('!test', () => {
     const content = [
-      'Frontend: <https://gist.github.com/talyssonoc/4b55d989ca0dee5b842dd01fbd5e3698>',
-      'Backend: <https://gist.github.com/talyssonoc/fa8094bc4f87ecee9f483f5fbc16862c>',
-      'Mobile: <https://gist.github.com/akitaonrails/ec29ca437ee1f18d9a2e613292a541bf>'
+      'Exemplo1: <https://exemplo.com/test1>',
+      'Exemplo2: <https://exemplo.com/test2>'
     ].join('\n')
 
     beforeEach(() => {
+      process.env.TEST_LINKS = content
+
       return co(function * () {
         yield this.room.user.say('user1', '!test')
       }.bind(this))
