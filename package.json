@@ -47,7 +47,7 @@
   "scripts": {
     "start": "./bin/hubot",
     "test": "mocha",
-    "posttest": "eslint .",
+    "lint": "eslint .",
     "tartufo": "tartufo scan-local-repo ."
   }
 }
