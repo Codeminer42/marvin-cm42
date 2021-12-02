@@ -1,7 +1,7 @@
 const { DateTime } = require('luxon')
 const { expect } = require('chai')
 
-const { isAllowedStreamYardUser, preventUrlExpansion, getDayName } = require('../../lib/utils')
+const { isAllowedStreamYardUser, preventUrlExpansion, getDayName, brownBagMessageList } = require('../../lib/utils')
 
 describe('/lib/utils', () => {
   describe('.isAllowedStreamYardUser', () => {
@@ -60,6 +60,34 @@ describe('/lib/utils', () => {
         expect(getDayName(DateTime.local(2022, 3, 24), 'en')).to.eq('THURSDAY')
         expect(getDayName(DateTime.local(2022, 3, 25), 'en')).to.eq('FRIDAY')
         expect(getDayName(DateTime.local(2022, 3, 26), 'en')).to.eq('SATURDAY')
+      })
+    })
+  })
+
+  describe('.brownBagMessageList', () => {
+    context('when stream param is not given', () => {
+      it('should return []', () => {
+        expect(brownBagMessageList()).to.deep.equal([])
+      })
+    })
+    context('when stream param is given', () => {
+      it('should return description beggining with "> "', () => {
+        const stream = {
+          id: 'some-video-id',
+          snippet: {
+            title: 'video title',
+            description: 'video desc',
+            scheduledStartTime: '2021-09-02T15:30:00Z'
+          }
+        }
+
+        expect(brownBagMessageList(stream)).to.deep.equal([
+          '**video title**',
+          '_2 de set. de 2021 12:30_',
+          'https://youtube.com/watch?v=some-video-id',
+          '',
+          '> video desc'
+        ])
       })
     })
   })

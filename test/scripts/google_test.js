@@ -289,10 +289,10 @@ describe('google', () => {
     })
   })
 
-  const sharedExamplesForYoutubeError = (command, youtubeArgs = []) => {
+  const sharedExamplesForYoutubeError = (command, youtubeArgs = [], method = 'getStreams') => {
     context('when an error occurs', () => {
       beforeEach(() => {
-        sandbox.stub(youtube, 'getStreams').rejects(new Error('Some shit happened!'))
+        sandbox.stub(youtube, method).rejects(new Error('Some shit happened!'))
 
         return co(
           function * () {
@@ -304,7 +304,7 @@ describe('google', () => {
       it('receives a message and no list', () => {
         const message = 'Some shit happened!'
 
-        expect(youtube.getStreams).to.have.been.calledWith(...youtubeArgs)
+        expect(youtube[method]).to.have.been.calledWith(...youtubeArgs)
         expect(this.room.messages).to.eql([
           ['user1', command],
           ['hubot', message]
@@ -550,5 +550,70 @@ describe('google', () => {
     })
 
     sharedExamplesForYoutubeError('!brownbagnext', [{ max: 1, status: 'upcoming' }])
+  })
+  describe('!brownbaglast', () => {
+    context('when there are no errors', () => {
+      let scheduledStreams = []
+
+      beforeEach(() => {
+        sandbox.stub(youtube, 'getLastStream').resolves(scheduledStreams)
+
+        return co(
+          function * () {
+            yield this.room.user.say('user1', '!brownbaglast')
+            yield new Promise((resolve) => setTimeout(resolve, 1000))
+          }.bind(this))
+      })
+
+      context('when there are upcoming streams', () => {
+        before(() => {
+          scheduledStreams = {
+            id: 'some-video-id',
+            snippet: {
+              title: 'video title',
+              description: 'video desc',
+              scheduledStartTime: '2021-09-02T15:30:00Z'
+            }
+          }
+        })
+
+        it('answers with the last schedule stream', () => {
+          const message = [
+            '**video title**',
+            '_2 de set. de 2021 12:30_',
+            'https://youtube.com/watch?v=some-video-id',
+            '',
+            '> video desc'
+          ].join('\n')
+
+          expect(youtube.getLastStream).to.have.been.calledWith({ max: 100, status: 'upcoming' })
+          expect(this.room.messages).to.eql([
+            ['user1', '!brownbaglast'],
+            ['hubot', message]
+          ])
+        })
+      })
+
+      context('when there are not upcoming streams', () => {
+        before(() => {
+          scheduledStreams = null
+        })
+
+        it('receives a message and no list', () => {
+          const message = [
+            '**NOTHING SCHEDULED YET! 📺**',
+            '<https://youtube.com/Codeminer42TV>'
+          ].join('\n')
+
+          expect(youtube.getLastStream).to.have.been.calledWith({ max: 100, status: 'upcoming' })
+          expect(this.room.messages).to.eql([
+            ['user1', '!brownbaglast'],
+            ['hubot', message]
+          ])
+        })
+      })
+    })
+
+    sharedExamplesForYoutubeError('!brownbaglast', [{ max: 100, status: 'upcoming' }], 'getLastStream')
   })
 })
