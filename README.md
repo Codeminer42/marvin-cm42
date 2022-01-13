@@ -67,10 +67,11 @@ You can start Marvin as a local server to connect to Discord.
 18. Copy the token and paste it back into the console (token.json file will be created)
 19. Fill the environment variables with the data from token.json and then delete the file.<br>
  Tip: in the `GMAIL_SCOPE` variable you have to put content inside quotes and apart by space
-20. Run marvin normally
-21. To use the calendar command you need to fill the variable with an calendar id.
-22. Go to google calendar, in the left tab, select your calendar or create one. To select, click in the vertical threed dots.
-23. In `Settings and sharing` you will find a `Calendar ID` in the bottom of the page. Fill the variable.
+20. Repeat steps 14 to 19 to login into youtube account and fill the YOUTUBE_ env vars.
+21. Run marvin normally
+22. To use the calendar command you need to fill the variable with an calendar id.
+23. Go to google calendar, in the left tab, select your calendar or create one. To select, click in the vertical threed dots.
+24. In `Settings and sharing` you will find a `Calendar ID` in the bottom of the page. Fill the variable.
 
 ### Allow users to use the `!streamyard` command
 
