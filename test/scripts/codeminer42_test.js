@@ -75,6 +75,7 @@ describe('codeminer42', () => {
       '',
       '**Quer apresentar?**',
       '- Preencha o formulário em <https://forms.gle/dPBDuQzi3gVTfuXbA> e leia todas as informações.',
+      '- O tempo máximo é de **30 minutos**.',
       '- Agendamento, dúvidas, etc, é só falar com `@paulodiovani`.',
       '',
       'Não é necessário preparação ou slides, apenas vontade de compartilhar algo com os colegas.'
