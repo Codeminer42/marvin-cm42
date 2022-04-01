@@ -34,7 +34,7 @@ describe('/lib/utils', () => {
     })
   })
 
-  describe.only('.getDayName', () => {
+  describe('.getDayName', () => {
     it('returns an uppercase string', () => {
       const dateTime = DateTime.local()
       const subject = getDayName(dateTime)
