@@ -15,6 +15,8 @@ const { DateTime } = require('luxon')
 const { isAllowedStreamYardUser, preventUrlExpansion, getDayName } = require('../lib/utils')
 
 module.exports = (robot) => {
+  const locale = 'pt-br'
+
   robot.hear(/!calendar\b/, res => {
     retrieveCalendar
       .getEventsList()
@@ -22,7 +24,7 @@ module.exports = (robot) => {
         return events.map(event => {
           return [
             '',
-            `> ${getDayName(event.date, 'pt-br')}`,
+            `> ${getDayName(event.date, locale)}`,
             `> **${event.title}**`,
             `> _${event.date.toLocaleString(DateTime.DATETIME_MED)}_`,
             event.description
@@ -89,7 +91,7 @@ module.exports = (robot) => {
     youtube
       .getStreams({ max: 3, status: 'upcoming' })
       .then((streams) => streams.map((stream) => {
-        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale: 'pt-br', zone: 'America/Sao_Paulo' })
+        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale, zone: 'America/Sao_Paulo' })
         const dateStr = date.toLocaleString(DateTime.DATETIME_MED)
 
         return [
@@ -117,7 +119,7 @@ module.exports = (robot) => {
     youtube
       .getStreams({ max: 100, status: 'upcoming' })
       .then((streams) => streams.map((stream) => {
-        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale: 'pt-br', zone: 'America/Sao_Paulo' })
+        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale, zone: 'America/Sao_Paulo' })
         const dateStr = date.toLocaleString(DateTime.DATETIME_MED)
 
         return ` - _${dateStr}_, **${stream.snippet.title}**, <https://youtube.com/watch?v=${stream.id}>`
@@ -138,7 +140,7 @@ module.exports = (robot) => {
     youtube
       .getStreams({ max: 1, status: 'completed' })
       .then((streams) => streams.map((stream) => {
-        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale: 'pt-br', zone: 'America/Sao_Paulo' })
+        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale, zone: 'America/Sao_Paulo' })
         const dateStr = date.toLocaleString(DateTime.DATETIME_MED)
 
         return [
@@ -162,7 +164,7 @@ module.exports = (robot) => {
     youtube
       .getStreams({ max: 1, status: 'upcoming' })
       .then((streams) => streams.map((stream) => {
-        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale: 'pt-br', zone: 'America/Sao_Paulo' })
+        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale, zone: 'America/Sao_Paulo' })
         const dateStr = date.toLocaleString(DateTime.DATETIME_MED)
 
         return [
