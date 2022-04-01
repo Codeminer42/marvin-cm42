@@ -34,7 +34,7 @@ describe('/lib/utils', () => {
     })
   })
 
-  describe('.getDayName', () => {
+  describe.only('.getDayName', () => {
     it('returns an uppercase string', () => {
       const dateTime = DateTime.local()
       const subject = getDayName(dateTime)
@@ -49,6 +49,18 @@ describe('/lib/utils', () => {
       expect(getDayName(DateTime.local(2022, 3, 24))).to.eq('QUINTA-FEIRA')
       expect(getDayName(DateTime.local(2022, 3, 25))).to.eq('SEXTA-FEIRA')
       expect(getDayName(DateTime.local(2022, 3, 26))).to.eq('SÁBADO')
+    })
+
+    context('when given a locale', () => {
+      it('returns the translated day of the week', () => {
+        expect(getDayName(DateTime.local(2022, 3, 20), 'en')).to.eq('SUNDAY')
+        expect(getDayName(DateTime.local(2022, 3, 21), 'en')).to.eq('MONDAY')
+        expect(getDayName(DateTime.local(2022, 3, 22), 'en')).to.eq('TUESDAY')
+        expect(getDayName(DateTime.local(2022, 3, 23), 'en')).to.eq('WEDNESDAY')
+        expect(getDayName(DateTime.local(2022, 3, 24), 'en')).to.eq('THURSDAY')
+        expect(getDayName(DateTime.local(2022, 3, 25), 'en')).to.eq('FRIDAY')
+        expect(getDayName(DateTime.local(2022, 3, 26), 'en')).to.eq('SATURDAY')
+      })
     })
   })
 })
