@@ -73,6 +73,10 @@ You can start Marvin as a local server to connect to Discord.
 23. Go to google calendar, in the left tab, select your calendar or create one. To select, click in the vertical threed dots.
 24. In `Settings and sharing` you will find a `Calendar ID` in the bottom of the page. Fill the variable.
 
+### Including calendars on Google Calendar
+
+If you're running Marvin on your organization, by default it has access to Google Calendar. However, if you can't see or access calendars when running `!calendar`, go to the Google Calendar **Configuration Menu** > **Integrate Calendar** and add the respective Calendar ID. After that, you should see the events of the calendar on Marvin's account, and `!calendar` should work as intended. 
+
 ### Allow users to use the `!streamyard` command
 
 To allow an user to use the `!streamyard` command to login into streamyard.com,

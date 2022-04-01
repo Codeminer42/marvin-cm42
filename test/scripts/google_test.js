@@ -183,13 +183,16 @@ describe('google', () => {
 
     const message = [
       '',
+      '> QUINTA-FEIRA',
       '> **chuva agora**',
       '> _28 de jan. de 2077 14:59_',
       '> <http://example.com/chuva>',
       '',
+      '> SEXTA-FEIRA',
       '> **iih hoje é dia de beber mas so depois do trabalho**',
       '> _29 de jan. de 2077 17:00_',
       '',
+      '> SÁBADO',
       '> **encerrando o expediente com uma opera**',
       '> _30 de jan. de 2077 17:00_'
     ].join('\n')
