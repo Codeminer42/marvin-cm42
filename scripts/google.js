@@ -22,7 +22,7 @@ module.exports = (robot) => {
         return events.map(event => {
           return [
             '',
-            `> ${getDayName(event.date)}`,
+            `> ${getDayName(event.date, 'pt-br')}`,
             `> **${event.title}**`,
             `> _${event.date.toLocaleString(DateTime.DATETIME_MED)}_`,
             event.description
