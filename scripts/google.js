@@ -12,7 +12,7 @@ const retrieveCalendar = require('../lib/google/retrieveCalendar')
 const youtube = require('../lib/google/youtube')
 const retrieveEmail = require('../lib/google/retrieveEmail')
 const { DateTime } = require('luxon')
-const { isAllowedStreamYardUser, preventUrlExpansion } = require('../lib/utils')
+const { isAllowedStreamYardUser, preventUrlExpansion, getDayName } = require('../lib/utils')
 
 module.exports = (robot) => {
   robot.hear(/!calendar\b/, res => {
@@ -22,6 +22,7 @@ module.exports = (robot) => {
         return events.map(event => {
           return [
             '',
+            `> ${getDayName(event.date)}`,
             `> **${event.title}**`,
             `> _${event.date.toLocaleString(DateTime.DATETIME_MED)}_`,
             event.description
