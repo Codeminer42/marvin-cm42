@@ -92,6 +92,7 @@ If you're running Marvin on your organization, by default it has access to Googl
 ### Allow users to use the `!streamyard` command
 
 To allow an user to use the `!streamyard` command to login into streamyard.com,
-add the Discord user ids to the `ALLOWED_STREAMYARD_USERS` env var, separated by commas.
+add the Discord user ids to the `ALLOWED_STREAMYARD_USERS` env var, separated by commas
+and fill the `STREAMYARD_USER_EMAIL` env var with the streamyard account e-mail.
 
 To get a Discord User Id, check [Where can I find my User/Server/Message ID?](https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-).
