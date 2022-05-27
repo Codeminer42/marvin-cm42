@@ -1,6 +1,6 @@
 # Marvin
 
-Marvin is a chat bot built on the [Hubot][hubot] framework.
+Marvin is a chat bot built on the [Hubot](https://hubot.github.com/) framework.
 
 ## Dependencies
 
@@ -10,11 +10,15 @@ Marvin is a chat bot built on the [Hubot][hubot] framework.
 
 Clone this repository, then run:
 
-    npm install
+```
+npm install
+```
 
 ## Unit tests
 
-    npm test
+```
+npm test
+```
 
 ## Running Marvin Locally
 
@@ -22,19 +26,25 @@ Clone this repository, then run:
 
 You can start Marvin locally by running:
 
-    npm start
+```
+npm start
+```
 
 You'll see some start up output and a prompt:
 
-    [Sat Feb 28 2015 12:38:27 GMT+0000 (GMT)] INFO Using default redis on localhost:6379
-    marvin>
+```
+[Sat Feb 28 2015 12:38:27 GMT+0000 (GMT)] INFO Using default redis on localhost:6379
+marvin>
+```
 
 Then you can interact with Marvin by typing `marvin help`.
 
-    marvin> marvin help
-    marvin animate me <query> - The same thing as `image me`, except adds [snip]
-    marvin help - Displays all of the help commands that marvin knows about.
-    ...
+```
+marvin> marvin help
+marvin animate me <query> - The same thing as `image me`, except adds [snip]
+marvin help - Displays all of the help commands that marvin knows about.
+...
+```
 
 ### Connect to Discord
 
@@ -43,7 +53,9 @@ You can start Marvin as a local server to connect to Discord.
 1. Ask for the `HUBOT_DISCORD_TOKEN` for someone in the team.
 2. Run:
 
-        HUBOT_DISCORD_TOKEN='the token you received' bin/hubot -a discord
+    ```
+    HUBOT_DISCORD_TOKEN='the token you received' bin/hubot -a discord
+    ```
 
 ### Connect to Gmail
 
