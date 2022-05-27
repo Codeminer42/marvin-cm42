@@ -1,0 +1,21 @@
+[tool.tartufo]
+exclude-path-patterns = [
+  { path-pattern='node_modules', reason='packages' },
+  { path-pattern='package-lock.json', reason='package lock file' },
+  { path-pattern='test', reason='test files, which may contain sample hashes' }
+]
+exclude-signatures = [
+  { signature='286da386ad35785b2ed9f158e665c8129536e0ce', reason='part of url' },
+  { signature='4b55d989ca0dee5b842dd01fbd5e3698', reason='part of gist url' },
+  { signature='694fc9e85735c400d7e0dc8e79576288', reason='part of gist url' },
+  { signature='711b5553533d1a14364907bbcdbee677', reason='part of gist url' },
+  { signature='a3512df3d9875e5156e5293fb3d97799', reason='part of gist url' },
+  { signature='c221cf47cea3a6a5dd353f1e24ad34b7', reason='part of gist url' },
+  { signature='ec29ca437ee1f18d9a2e613292a541bf', reason='part of gist url' },
+  { signature='edfcf4bbc33dfcf16366ac2374802b86', reason='part of gist url' },
+  { signature='fa8094bc4f87ecee9f483f5fbc16862c', reason='part of gist url' },
+  # tartufo issue when finding signatures
+  { signature='+distributionBase=GRADLE_USER_HOME', reason='tartufo issue: incorrect signature found' },
+  { signature='com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-', reason='tartufo issue: incorrect signature found' },
+  { signature='com/paulodiovani/edfcf4bbc33dfcf16366ac2374802b86/raw/286da386ad35785b2ed9f158e665c8129536e0ce/excuses', reason='tartufo issue: incorrect signature found' },
+]
