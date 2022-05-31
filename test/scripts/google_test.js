@@ -567,17 +567,17 @@ describe('google', () => {
 
       context('when there are upcoming streams', () => {
         before(() => {
-          scheduledStreams = {
+          scheduledStreams = [{
             id: 'some-video-id',
             snippet: {
               title: 'video title',
               description: 'video desc',
               scheduledStartTime: '2021-09-02T15:30:00Z'
             }
-          }
+          }]
         })
 
-        it('answers with the last schedule stream', () => {
+        it('answers with the last scheduled stream', () => {
           const message = [
             '**video title**',
             '_2 de set. de 2021 12:30_',
@@ -586,7 +586,7 @@ describe('google', () => {
             '> video desc'
           ].join('\n')
 
-          expect(youtube.getLastStream).to.have.been.calledWith({ max: 100, status: 'upcoming' })
+          expect(youtube.getLastStream).to.have.been.calledWith({ status: 'upcoming' })
           expect(this.room.messages).to.eql([
             ['user1', '!brownbaglast'],
             ['hubot', message]
@@ -596,7 +596,7 @@ describe('google', () => {
 
       context('when there are not upcoming streams', () => {
         before(() => {
-          scheduledStreams = null
+          scheduledStreams = []
         })
 
         it('receives a message and no list', () => {
@@ -605,7 +605,7 @@ describe('google', () => {
             '<https://youtube.com/Codeminer42TV>'
           ].join('\n')
 
-          expect(youtube.getLastStream).to.have.been.calledWith({ max: 100, status: 'upcoming' })
+          expect(youtube.getLastStream).to.have.been.calledWith({ status: 'upcoming' })
           expect(this.room.messages).to.eql([
             ['user1', '!brownbaglast'],
             ['hubot', message]
@@ -614,6 +614,6 @@ describe('google', () => {
       })
     })
 
-    sharedExamplesForYoutubeError('!brownbaglast', [{ max: 100, status: 'upcoming' }], 'getLastStream')
+    sharedExamplesForYoutubeError('!brownbaglast', [{ status: 'upcoming' }], 'getLastStream')
   })
 })

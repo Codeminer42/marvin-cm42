@@ -13,7 +13,7 @@ const retrieveCalendar = require('../lib/google/retrieveCalendar')
 const youtube = require('../lib/google/youtube')
 const retrieveEmail = require('../lib/google/retrieveEmail')
 const { DateTime } = require('luxon')
-const { isAllowedStreamYardUser, preventUrlExpansion, getDayName, brownBagMessageList } = require('../lib/utils')
+const { isAllowedStreamYardUser, preventUrlExpansion, getDayName } = require('../lib/utils')
 
 module.exports = (robot) => {
   const locale = 'pt-br'
@@ -140,7 +140,20 @@ module.exports = (robot) => {
   robot.hear(/!brownbagprev\b/, res => {
     youtube
       .getStreams({ max: 1, status: 'completed' })
-      .then((streams) => streams.map(brownBagMessageList))
+      .then((streams) => streams.map((stream) => {
+        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale, zone: 'America/Sao_Paulo' })
+        const dateStr = date.toLocaleString(DateTime.DATETIME_MED)
+
+        return [
+          `**${stream.snippet.title}**`,
+          `_${dateStr}_`,
+          `https://youtube.com/watch?v=${stream.id}`,
+          '',
+          stream.snippet.description
+            ? preventUrlExpansion(stream.snippet.description).replace(/\r/gm, '').replace(/^/gm, '> ')
+            : null
+        ]
+      }))
       .then(streams => streams.reduce((acc, item) => acc.concat(item), [])) // flatten
       .then(streams => streams.filter(l => l !== null))
       .then(streams => streams.join('\n'))
@@ -151,7 +164,20 @@ module.exports = (robot) => {
   robot.hear(/!brownbagnext\b/, res => {
     youtube
       .getStreams({ max: 1, status: 'upcoming' })
-      .then((streams) => streams.map(brownBagMessageList))
+      .then((streams) => streams.map((stream) => {
+        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale, zone: 'America/Sao_Paulo' })
+        const dateStr = date.toLocaleString(DateTime.DATETIME_MED)
+
+        return [
+          `**${stream.snippet.title}**`,
+          `_${dateStr}_`,
+          `https://youtube.com/watch?v=${stream.id}`,
+          '',
+          stream.snippet.description
+            ? preventUrlExpansion(stream.snippet.description).replace(/\r/gm, '').replace(/^/gm, '> ')
+            : null
+        ]
+      }))
       .then(streams => streams.reduce((acc, item) => acc.concat(item), [])) // flatten
       .then(streams => streams.filter(l => l !== null))
       .then(streams => {
@@ -169,9 +195,22 @@ module.exports = (robot) => {
   robot.hear(/!brownbaglast\b/, res => {
     youtube
       .getLastStream(
-        { max: 100, status: 'upcoming' }
+        { status: 'upcoming' }
       )
-      .then((streams) => brownBagMessageList(streams))
+      .then((streams) => streams.map((stream) => {
+        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale, zone: 'America/Sao_Paulo' })
+        const dateStr = date.toLocaleString(DateTime.DATETIME_MED)
+
+        return [
+          `**${stream.snippet.title}**`,
+          `_${dateStr}_`,
+          `https://youtube.com/watch?v=${stream.id}`,
+          '',
+          stream.snippet.description
+            ? preventUrlExpansion(stream.snippet.description).replace(/\r/gm, '').replace(/^/gm, '> ')
+            : null
+        ]
+      }))
       .then(streams => streams.reduce((acc, item) => acc.concat(item), [])) // flatten
       .then(streams => streams.filter(l => l !== null))
       .then(streams => {
