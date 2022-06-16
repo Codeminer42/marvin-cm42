@@ -190,4 +190,21 @@ module.exports = (robot) => {
       .then(streams => res.send(streams))
       .catch(error => res.send(error.message))
   })
+
+  robot.hear(/!brownbagfree\b/, res => {
+    // TODO: tries to search between the period of the current date and the latest stream date
+    youtube
+      .getStreams({ max: 10, status: 'upcoming' })
+      .then(streams => streams.map(stream => stream.snippet.scheduledStartTime).reverse())
+      .then(dates => {
+        const lastScheduledDate = DateTime.fromISO(dates[0])
+        return lastScheduledDate.plus({ week: 1 })
+      })
+      .then(date => [
+        'We have a free brownbag slot for:',
+        date.toLocaleString(DateTime.DATE_SHORT)
+      ].join('\n'))
+      .then(date => res.send(date))
+      .catch(error => res.send(error.message))
+  })
 }
