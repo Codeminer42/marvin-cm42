@@ -12,7 +12,7 @@ const retrieveCalendar = require('../lib/google/retrieveCalendar')
 const youtube = require('../lib/google/youtube')
 const retrieveEmail = require('../lib/google/retrieveEmail')
 const { DateTime } = require('luxon')
-const { isAllowedStreamYardUser, preventUrlExpansion, getDayName } = require('../lib/utils')
+const { isAllowedStreamYardUser, preventUrlExpansion, getDayName, getNextStreamDateAvailable } = require('../lib/utils')
 
 module.exports = (robot) => {
   const locale = 'pt-br'
@@ -192,19 +192,16 @@ module.exports = (robot) => {
   })
 
   robot.hear(/!brownbagfree\b/, res => {
-    // TODO: tries to search between the period of the current date and the latest stream date
     youtube
       .getStreams({ max: 10, status: 'upcoming' })
-      .then(streams => streams.map(stream => stream.snippet.scheduledStartTime).reverse())
-      .then(dates => {
-        const lastScheduledDate = DateTime.fromISO(dates[0])
-        return lastScheduledDate.plus({ week: 1 })
-      })
-      .then(date => [
+      .then(streams => streams.map(stream => stream.snippet.scheduledStartTime))
+      .then(streamsDates => getNextStreamDateAvailable(streamsDates))
+      .then(streamDate => [
         'We have a free brownbag slot for:',
-        date.toLocaleString(DateTime.DATE_SHORT)
-      ].join('\n'))
-      .then(date => res.send(date))
+        streamDate.toLocaleString(DateTime.DATETIME_MED)
+      ])
+      .then(messages => messages.join('\n'))
+      .then(message => res.send(message))
       .catch(error => res.send(error.message))
   })
 }
