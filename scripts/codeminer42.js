@@ -72,7 +72,7 @@ module.exports = (robot) => {
     )
   })
 
-  robot.hear(/!brownbagchecklist\b|!checklist\b/, (res) => {
+  robot.hear(/!(brownbag|)checklist\b/, (res) => {
     res.send(
       [
         'Antes de iniciar uma brownbag,',
