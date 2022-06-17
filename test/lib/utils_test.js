@@ -65,6 +65,17 @@ describe('/lib/utils', () => {
   })
 
   describe('.getNextStreamDateAvailable', () => {
+    describe('when there are no upcoming streams', () => {
+      it('returns the next Thursday date', () => {
+        const dates = []
+
+        const expectedWeekDay = 4
+        const actualWeekDay = getNextStreamDateAvailable(dates).weekday
+
+        expect(expectedWeekDay).to.eql(actualWeekDay)
+      })
+    })
+
     describe('when there are no available date before the last upcoming stream', () => {
       it('returns the last date + 7 days', () => {
         const dates = [
@@ -80,7 +91,7 @@ describe('/lib/utils', () => {
       })
     })
 
-    describe('when there is a single available dates before the last upcoming stream', () => {
+    describe('when there is a single available date before the last upcoming stream', () => {
       it('returns the first available date in the gap', () => {
         const dates = [
           DateTime.utc(2022, 6, 2),
