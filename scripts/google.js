@@ -194,8 +194,9 @@ module.exports = (robot) => {
   robot.hear(/!brownbagfree\b/, res => {
     youtube
       .getStreams({ max: 10, status: 'upcoming' })
-      .then(streams => streams.map(stream => stream.snippet.scheduledStartTime))
-      .then(streamsDates => getNextStreamDateAvailable(streamsDates))
+      .then(streams => streams.map(stream => new Date(stream.snippet.scheduledStartTime)))
+      .then(streams => streams.map(stream => DateTime.fromJSDate(stream)))
+      .then(streams => getNextStreamDateAvailable(streams))
       .then(streamDate => [
         'We have a free brownbag slot for:',
         streamDate.toLocaleString(DateTime.DATETIME_MED)
