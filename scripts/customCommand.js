@@ -10,6 +10,8 @@ const preDefinedCommands = [
   'brownbag',
   'brownbagnext',
   'brownbagprev',
+  'brownbagchecklist',
+  'checklist',
   'calendar',
   'egghead',
   'excuses',
