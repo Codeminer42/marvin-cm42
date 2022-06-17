@@ -7,6 +7,8 @@
 //   !godead - Display GoDead logo
 //   !talysson - Display Talysson card
 //   !test - Display all tests links
+//   !brownbagchecklist - Display a list of things to test before a brownbag
+//   !checklist - Alias to !brownbagchecklist
 module.exports = (robot) => {
   robot.hear(/!almoso\b/, (res) => {
     res.send('http://i.imgur.com/gTviOgc.jpg')
@@ -66,6 +68,30 @@ module.exports = (robot) => {
       [
         "It's time to duel",
         'https://res.cloudinary.com/dgjml2eyw/image/upload/v1545316115/taly.png'
+      ].join('\n')
+    )
+  })
+
+  robot.hear(/!brownbagchecklist\b|!checklist\b/, (res) => {
+    res.send(
+      [
+        'Antes de iniciar uma brownbag,',
+        'ambos anfitrião e apresentador devem conferir todos os itens abaixo:',
+        '',
+        'Áudio',
+        ' - Volume',
+        ' - Qualidade do som ou ruídos',
+        '',
+        'Tamanho da fonte',
+        ' - Slides',
+        ' - Browser (documentação, devtools, exemplos, etc.)',
+        ' - Terminal (exemplos)',
+        ' - Editor (live coding)',
+        '',
+        'Câmera (caso utilizada)',
+        ' - Qualidade de imagem / Iluminação',
+        ' - Posição da Câmera',
+        ' - Estabilidade de vídeo (internet)'
       ].join('\n')
     )
   })
