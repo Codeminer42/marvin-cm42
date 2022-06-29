@@ -169,4 +169,74 @@ describe('codeminer42', () => {
       ])
     })
   })
+
+  describe('!brownbagchecklist', () => {
+    const content = [
+      'Antes de iniciar uma brownbag,',
+      'ambos anfitrião e apresentador devem conferir todos os itens abaixo:',
+      '',
+      'Áudio',
+      ' - Volume',
+      ' - Qualidade do som ou ruídos',
+      '',
+      'Tamanho da fonte',
+      ' - Slides',
+      ' - Browser (documentação, devtools, exemplos, etc.)',
+      ' - Terminal (exemplos)',
+      ' - Editor (live coding)',
+      '',
+      'Câmera (caso utilizada)',
+      ' - Qualidade de imagem / Iluminação',
+      ' - Posição da Câmera',
+      ' - Estabilidade de vídeo (internet)'
+    ].join('\n')
+
+    beforeEach(() => {
+      return co(function * () {
+        yield this.room.user.say('user1', '!brownbagchecklist')
+      }.bind(this))
+    })
+
+    it('answers with the correct message', () => {
+      expect(this.room.messages).to.eql([
+        ['user1', '!brownbagchecklist'],
+        ['hubot', content]
+      ])
+    })
+  })
+
+  describe('!checklist', () => {
+    const content = [
+      'Antes de iniciar uma brownbag,',
+      'ambos anfitrião e apresentador devem conferir todos os itens abaixo:',
+      '',
+      'Áudio',
+      ' - Volume',
+      ' - Qualidade do som ou ruídos',
+      '',
+      'Tamanho da fonte',
+      ' - Slides',
+      ' - Browser (documentação, devtools, exemplos, etc.)',
+      ' - Terminal (exemplos)',
+      ' - Editor (live coding)',
+      '',
+      'Câmera (caso utilizada)',
+      ' - Qualidade de imagem / Iluminação',
+      ' - Posição da Câmera',
+      ' - Estabilidade de vídeo (internet)'
+    ].join('\n')
+
+    beforeEach(() => {
+      return co(function * () {
+        yield this.room.user.say('user1', '!checklist')
+      }.bind(this))
+    })
+
+    it('answers with the same message as !brownbagchecklist', () => {
+      expect(this.room.messages).to.eql([
+        ['user1', '!checklist'],
+        ['hubot', content]
+      ])
+    })
+  })
 })
