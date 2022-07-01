@@ -202,13 +202,10 @@ module.exports = (robot) => {
         const dateStr = date.toLocaleString(DateTime.DATETIME_MED)
 
         return [
-          `**${stream.snippet.title}**`,
-          `_${dateStr}_`,
-          `https://youtube.com/watch?v=${stream.id}`,
+          `A última brownbag agendada será em _${dateStr}_,`,
+          'Novos envios serão apresentados após esta data.',
           '',
-          stream.snippet.description
-            ? preventUrlExpansion(stream.snippet.description).replace(/\r/gm, '').replace(/^/gm, '> ')
-            : null
+          'Use o comando `!brownbag` para obter informações de como enviar a sua.'
         ]
       }))
       .then(streams => streams.reduce((acc, item) => acc.concat(item), [])) // flatten

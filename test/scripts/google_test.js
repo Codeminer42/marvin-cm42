@@ -551,6 +551,7 @@ describe('google', () => {
 
     sharedExamplesForYoutubeError('!brownbagnext', [{ max: 1, status: 'upcoming' }])
   })
+
   describe('!brownbaglast', () => {
     context('when there are no errors', () => {
       let scheduledStreams = []
@@ -579,11 +580,10 @@ describe('google', () => {
 
         it('answers with the last scheduled stream', () => {
           const message = [
-            '**video title**',
-            '_2 de set. de 2021 12:30_',
-            'https://youtube.com/watch?v=some-video-id',
+            'A última brownbag agendada será em _2 de set. de 2021 12:30_,',
+            'Novos envios serão apresentados após esta data.',
             '',
-            '> video desc'
+            'Use o comando `!brownbag` para obter informações de como enviar a sua.'
           ].join('\n')
 
           expect(youtube.getLastStream).to.have.been.calledWith({ status: 'upcoming' })
