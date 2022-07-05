@@ -194,10 +194,12 @@ module.exports = (robot) => {
 
   robot.hear(/!brownbaglast\b/, res => {
     youtube
-      .getLastStream(
-        { status: 'upcoming' }
-      )
-      .then((streams) => streams.map((stream) => {
+      .getLastStream()
+      .then((stream) => {
+        if (!stream) {
+          return ['**NOTHING SCHEDULED YET! 📺**', '<https://youtube.com/Codeminer42TV>']
+        }
+
         const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale, zone: 'America/Sao_Paulo' })
         const dateStr = date.toLocaleString(DateTime.DATETIME_MED)
 
@@ -207,15 +209,6 @@ module.exports = (robot) => {
           '',
           'Use o comando `!brownbag` para obter informações de como enviar a sua.'
         ]
-      }))
-      .then(streams => streams.reduce((acc, item) => acc.concat(item), [])) // flatten
-      .then(streams => streams.filter(l => l !== null))
-      .then(streams => {
-        if (streams.length === 0) {
-          return ['**NOTHING SCHEDULED YET! 📺**', '<https://youtube.com/Codeminer42TV>']
-        }
-
-        return streams
       })
       .then(streams => streams.join('\n'))
       .then(streams => res.send(streams))

@@ -554,10 +554,10 @@ describe('google', () => {
 
   describe('!brownbaglast', () => {
     context('when there are no errors', () => {
-      let scheduledStreams = []
+      let lastStream
 
       beforeEach(() => {
-        sandbox.stub(youtube, 'getLastStream').resolves(scheduledStreams)
+        sandbox.stub(youtube, 'getLastStream').resolves(lastStream)
 
         return co(
           function * () {
@@ -568,14 +568,14 @@ describe('google', () => {
 
       context('when there are upcoming streams', () => {
         before(() => {
-          scheduledStreams = [{
+          lastStream = {
             id: 'some-video-id',
             snippet: {
               title: 'video title',
               description: 'video desc',
               scheduledStartTime: '2021-09-02T15:30:00Z'
             }
-          }]
+          }
         })
 
         it('answers with the last scheduled stream', () => {
@@ -586,7 +586,6 @@ describe('google', () => {
             'Use o comando `!brownbag` para obter informações de como enviar a sua.'
           ].join('\n')
 
-          expect(youtube.getLastStream).to.have.been.calledWith({ status: 'upcoming' })
           expect(this.room.messages).to.eql([
             ['user1', '!brownbaglast'],
             ['hubot', message]
@@ -596,7 +595,7 @@ describe('google', () => {
 
       context('when there are not upcoming streams', () => {
         before(() => {
-          scheduledStreams = []
+          lastStream = undefined
         })
 
         it('receives a message and no list', () => {
@@ -605,7 +604,6 @@ describe('google', () => {
             '<https://youtube.com/Codeminer42TV>'
           ].join('\n')
 
-          expect(youtube.getLastStream).to.have.been.calledWith({ status: 'upcoming' })
           expect(this.room.messages).to.eql([
             ['user1', '!brownbaglast'],
             ['hubot', message]
@@ -614,6 +612,6 @@ describe('google', () => {
       })
     })
 
-    sharedExamplesForYoutubeError('!brownbaglast', [{ status: 'upcoming' }], 'getLastStream')
+    sharedExamplesForYoutubeError('!brownbaglast', [], 'getLastStream')
   })
 })
