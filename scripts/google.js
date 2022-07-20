@@ -1,6 +1,7 @@
 // Commands using google tools, such as reading email or calendar
 //
 // Commands:
+//   !brownbaglast - the last schedule video
 //   !brownbagnext - the next schedule stream
 //   !brownbagprev - the last streamed video
 //   !calendar - List upcoming events
@@ -185,6 +186,29 @@ module.exports = (robot) => {
         }
 
         return streams
+      })
+      .then(streams => streams.join('\n'))
+      .then(streams => res.send(streams))
+      .catch(error => res.send(error.message))
+  })
+
+  robot.hear(/!brownbaglast\b/, res => {
+    youtube
+      .getLastStream()
+      .then((stream) => {
+        if (!stream) {
+          return ['**NOTHING SCHEDULED YET! 📺**', '<https://youtube.com/Codeminer42TV>']
+        }
+
+        const date = DateTime.fromISO(stream.snippet.scheduledStartTime, { locale, zone: 'America/Sao_Paulo' })
+        const dateStr = date.toLocaleString(DateTime.DATETIME_MED)
+
+        return [
+          `A última brownbag agendada será em _${dateStr}_,`,
+          'Novos envios serão apresentados após esta data.',
+          '',
+          'Use o comando `!brownbag` para obter informações de como enviar a sua.'
+        ]
       })
       .then(streams => streams.join('\n'))
       .then(streams => res.send(streams))
