@@ -47,7 +47,9 @@
   },
   "scripts": {
     "start": "./bin/hubot",
-    "test": "mocha",
+    "test": "npm run test:coverage",
+    "test:runner": "mocha",
+    "test:coverage": "nyc npm run test:runner",
     "posttest": "eslint .",
     "tartufo": "tartufo scan-local-repo ."
   }
