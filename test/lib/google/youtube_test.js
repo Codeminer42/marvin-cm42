@@ -1,9 +1,13 @@
-const { expect } = require('chai')
-const sinon = require('sinon')
-const { google } = require('googleapis')
+const chai = require('chai')
+const { createSandbox } = require('sinon')
+const sinonChai = require('sinon-chai')
 const { getLastStream } = require('../../../lib/google/youtube')
+const { google } = require('googleapis')
 
-const sandbox = sinon.sandbox.create()
+const { expect } = chai
+
+chai.use(sinonChai)
+const sandbox = createSandbox()
 
 describe('/lib/google/youtube', () => {
   afterEach(function () {
@@ -11,9 +15,10 @@ describe('/lib/google/youtube', () => {
   })
 
   describe('.getLastStream', () => {
-    const listStub = sandbox.stub()
+    let listStub
 
     beforeEach(function () {
+      listStub = sandbox.stub()
       sandbox.stub(google, 'youtube').returns({
         liveBroadcasts: {
           list: listStub
@@ -105,6 +110,7 @@ describe('/lib/google/youtube', () => {
 
       it('resolves with the last stream from next page', async () => {
         const stream = await getLastStream()
+        expect(listStub).to.have.been.calledTwice // eslint-disable-line no-unused-expressions
         expect(stream.id).to.equal('some-video-id-4')
       })
     })
