@@ -1,5 +1,16 @@
+# node.js stuff
 node_modules
+
+# mac stuff
 .DS_Store*
+
+# hubot stuff
 .hubot_history
+
+# env config
 .env
 .tool-versions
+
+# coverage
+.nyc_output
+coverage
