@@ -9,7 +9,7 @@ const { expect } = chai
 chai.use(sinonChai)
 const sandbox = createSandbox()
 
-describe('/lib/authenticate', () => {
+describe('/lib/retrieveEmail', () => {
   let clientMock
   let gmailMock
 
@@ -58,6 +58,16 @@ describe('/lib/authenticate', () => {
         const email = await getEmail({ from: 'foobar@example.com' })
 
         expect(email).to.eq('foobar')
+      })
+    })
+
+    context('when there are no emails', () => {
+      it('returns null', async () => {
+        gmailMock.users.messages.list.resolves({ data: { messages: null } })
+
+        const email = await getEmail({ from: 'foobar@example.com' })
+
+        expect(email).to.eq(null)
       })
     })
   })
