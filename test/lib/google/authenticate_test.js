@@ -1,6 +1,6 @@
 const chai = require('chai')
 const sinonChai = require('sinon-chai')
-const { authenticate } = require('../../lib/google/authenticate')
+const { authenticate } = require('../../../lib/google/authenticate')
 const { createSandbox } = require('sinon')
 const { google } = require('googleapis')
 
